@@ -1,23 +1,12 @@
 const express = require("express");
 
 const app = express();
+app.use(express.json());
 
-app.get("/message/:id/:user", (request, response) => {
-  const { id, user } = request.params;
+app.post("/users", (request, response) => {
+  const { name, email, password } = request.body;
 
-  response.send(`
-    Message ID: ${id}.
-    For user: ${user}.
-  `);
-});
-
-app.get("/users", (request, response) => {
-  const { page, limit } = request.query;
-
-  response.send(`
-    Page: ${page}.
-    Show: ${limit}.
-  `);
+  response.json({ name, email, password });
 });
 
 const PORT = 3333;
